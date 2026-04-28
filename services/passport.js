@@ -14,15 +14,15 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       // Code to handle user authentication and retrieval
       const newUser = {
-        googleId: profile.id,
-        displayName: profile.displayName,
+        oauth_id: profile.id,
+        oauth_provider: "google",
+        name: profile.displayName,
         email: profile.emails?.[0]?.value,
-        Image: profile.photos?.[0]?.value,
       };
 
       try {
         // Check if user exists, if not create them
-        let user = await User.findOne({ where: { googleId: profile.id } });
+        let user = await User.findOne({ where: { oauth_id: profile.id, oauth_provider: "google" } });
 
         if (user) {
           done(null, user);
