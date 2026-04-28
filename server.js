@@ -4,6 +4,17 @@ const passport = require("passport");
 require("dotenv").config({ quiet: true });
 
 const authRouter = require("./router/authRoutes");
+const userRouter = require("./router/userRoutes");
+const productRouter = require("./router/productRoutes");
+const categoryRouter = require("./router/categoryRoutes");
+const cartRouter = require("./router/cartRoutes");
+const wishlistRouter = require("./router/wishlistRoutes");
+const orderRouter = require("./router/orderRoutes");
+const paymentRouter = require("./router/paymentRoutes");
+const discountRouter = require("./router/discountRoutes");
+const inventoryRouter = require("./router/inventoryRoutes");
+const adminRouter = require("./router/adminRoutes");
+const uploadRouter = require("./router/uploadRoutes");
 const { connectDB, sequelize } = require("./config/db");
 
 require("./services/passport");
@@ -49,6 +60,17 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/users", userRouter);
+app.use("/products", productRouter);
+app.use("/categories", categoryRouter);
+app.use("/cart", cartRouter);
+app.use("/wishlist", wishlistRouter);
+app.use("/orders", orderRouter);
+app.use("/payments", paymentRouter);
+app.use("/discounts", discountRouter);
+app.use("/inventory", inventoryRouter);
+app.use("/admin", adminRouter);
+app.use("/upload", uploadRouter);
 
 const startServer = async () => {
   await connectDB();

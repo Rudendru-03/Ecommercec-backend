@@ -3,31 +3,29 @@ const passport = require("passport");
 const authController = require("../controller/authController");
 const router = express.Router();
 
-// Initiates the Google OAuth 2.0 authentication flow
+// --- PUBLIC ROUTES ---
+
+// Email/Password Auth
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+router.post("/refresh", authController.refresh);
+router.post("/forgot-password", authController.forgotPassword);
+router.post("/reset-password", authController.resetPassword);
+
+// Google OAuth 2.0 Auth
 router.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] }),
 );
 
-// Callback URL for handling the OAuth 2.0 response
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
-  (req, res) => {
-    // Successful authentication, redirect or handle the user as desired
-    res.redirect("/");
-  },
+  authController.googleCallback
 );
 
-// Logout route
-router.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-
-    res.redirect("/");
-  });
-});
+// --- PROTECTED ROUTES ---
+// We will add auth and role-based access control middleware here later
+router.post("/logout", authController.logout);
 
 module.exports = router;
