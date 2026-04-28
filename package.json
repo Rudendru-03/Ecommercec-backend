@@ -14,9 +14,11 @@
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "mysql2": "^3.22.2",
-    "nodemon": "^3.1.14",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "sequelize": "^6.37.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
