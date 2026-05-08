@@ -6,8 +6,9 @@ const router = express.Router();
 router.get("/", categoryController.getAllCategories);
 
 // --- ADMIN ROUTES (auth + admin role required) ---
-// We will add role-based access control middleware here later
+router.post("/seed", categoryController.seedInitialCategories);
 router.post("/", categoryController.createCategory);
 router.put("/:id", categoryController.updateCategory);
+router.delete("/:id", categoryController.deleteCategory);
 
 module.exports = router;
